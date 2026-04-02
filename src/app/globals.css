@@ -1,0 +1,805 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Professional Corporate Palette - Light Mode */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 221 83% 53% / 0.08;
+    --accent-foreground: 221 83% 53%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+    --radius: 0.75rem;
+
+    /* Professional accent colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 100%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(262 83% 58%));
+    --gradient-subtle: linear-gradient(135deg, hsl(210 40% 98%), hsl(221 83% 53% / 0.05));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 40% 98%));
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 40px hsl(221 83% 53% / 0.15);
+
+    /* Typography Scale */
+    --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --font-size-sm: clamp(0.875rem, 0.825rem + 0.25vw, 1rem);
+    --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --font-size-lg: clamp(1.125rem, 1.05rem + 0.375vw, 1.25rem);
+    --font-size-xl: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+    --font-size-2xl: clamp(1.5rem, 1.35rem + 0.75vw, 2rem);
+    --font-size-3xl: clamp(1.875rem, 1.6rem + 1.25vw, 2.5rem);
+    --font-size-4xl: clamp(2.25rem, 1.85rem + 2vw, 3.25rem);
+    --font-size-5xl: clamp(3rem, 2.4rem + 3vw, 4.5rem);
+  }
+
+  .dark {
+    /* Professional Corporate Palette - Dark Mode */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 217 91% 60% / 0.1;
+    --accent-foreground: 217 91% 60%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+
+    --success: 142 70% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --info: 217 91% 60%;
+    --info-foreground: 0 0% 100%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(262 83% 65%));
+    --gradient-subtle: linear-gradient(135deg, hsl(222 47% 6%), hsl(217 91% 60% / 0.08));
+    --gradient-card: linear-gradient(180deg, hsl(222 47% 8%), hsl(222 47% 6%));
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+    --shadow-glow: 0 0 60px hsl(217 91% 60% / 0.2);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Professional Typography Hierarchy */
+  h1 {
+    font-size: var(--font-size-4xl);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+    color: hsl(var(--foreground));
+  }
+
+  h2 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    color: hsl(var(--foreground));
+  }
+
+  h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+    color: hsl(var(--foreground));
+  }
+
+  h4 {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    color: hsl(var(--foreground));
+  }
+
+  p {
+    margin-bottom: 1rem;
+    line-height: 1.75;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 0.875em;
+  }
+
+  /* Selection styling */
+  ::selection {
+    background-color: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  /* Professional Button Styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-200;
+    background: var(--gradient-primary);
+    box-shadow: var(--shadow-md), 0 0 20px hsl(var(--primary) / 0.2);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), 0 0 30px hsl(var(--primary) / 0.3);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground shadow-sm transition-all duration-200 hover:bg-accent hover:border-primary/30;
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Professional Card Styles */
+  .card {
+    @apply rounded-xl border border-border bg-card p-6 shadow-sm transition-all duration-300;
+    background: var(--gradient-card);
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: hsl(var(--primary) / 0.2);
+    transform: translateY(-4px);
+  }
+
+  /* Section Styles */
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-title {
+    @apply text-center mb-4;
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .section-subtitle {
+    @apply text-center text-muted-foreground max-w-2xl mx-auto mb-12;
+    font-size: var(--font-size-lg);
+  }
+
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glass Effect */
+  .glass {
+    @apply backdrop-blur-xl border border-white/10;
+    background: hsl(var(--card) / 0.8);
+  }
+
+  /* Animated Background */
+  .bg-grid {
+    background-image: 
+      linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Smooth Scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+}
+
+@layer utilities {
+  /* Animation Utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    font-weight: 450;
+    /* Slightly heavier than 400 for better readability */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Typography Hierarchy with Responsive Scaling */
+  h1 {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    color: hsl(var(--foreground));
+  }
+
+  h2 {
+    font-size: var(--font-size-3xl);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin-bottom: 0.875rem;
+    color: hsl(var(--foreground));
+  }
+
+  h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+    color: hsl(var(--foreground));
+  }
+
+  h4 {
+    font-size: var(--font-size-xl);
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 0.625rem;
+    color: hsl(var(--foreground));
+  }
+
+  h5 {
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+    color: hsl(var(--foreground));
+  }
+
+  h6 {
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    color: hsl(var(--foreground));
+  }
+
+  /* Body Text and Paragraphs */
+  p {
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    /* Improved line height for better readability */
+    margin-bottom: 1.25em;
+    color: hsl(var(--foreground));
+    font-weight: 400;
+  }
+
+  /* Enhanced readability for project descriptions and content */
+  .dark p {
+    font-weight: 450;
+    /* Slightly heavier font weight in dark mode */
+    letter-spacing: 0.015em;
+    /* Better letter spacing for dark backgrounds */
+  }
+
+  /* Lists */
+  ul,
+  ol {
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    /* Improved line height for lists */
+    margin-bottom: 1.25em;
+    padding-left: 1.5em;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+    color: hsl(var(--foreground));
+  }
+
+  /* Small text */
+  small {
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    /* Better line height for small text */
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Links */
+  a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: hsl(var(--primary) / 0.8);
+    text-decoration: underline;
+  }
+
+  /* Improved contrast for muted text */
+  .text-muted-foreground {
+    color: hsl(var(--muted-foreground)) !important;
+    opacity: 1;
+    /* Remove opacity to rely on color contrast instead */
+  }
+
+  /* Enhanced contrast for dark mode text */
+  .dark .text-muted-foreground {
+    opacity: 1;
+    /* Remove opacity to rely on color contrast instead */
+    font-weight: 450;
+    /* Slightly heavier font weight in dark mode for better readability */
+  }
+
+  /* Improved readability for project card text */
+  .dark .line-clamp-3 {
+    font-weight: 450;
+    letter-spacing: 0.01em;
+  }
+
+  /* Button hover state fixes for proper text contrast */
+  .bg-primary {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .bg-primary:hover {
+    background-color: hsl(var(--primary) / 0.9);
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  /* Ensure proper text contrast on hover for all button variants */
+  .hover\:bg-primary\/90:hover {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  /* Fix for secondary/muted link hover states */
+  .text-muted-foreground:hover {
+    color: hsl(var(--foreground)) !important;
+  }
+
+  /* Ensure primary button text stays contrasted */
+  .text-primary-foreground {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  /* Dark mode specific button fixes */
+  .dark .bg-primary {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .dark .bg-primary:hover {
+    background-color: hsl(var(--primary) / 0.9);
+    color: hsl(var(--primary-foreground)) !important;
+  }
+}
+
+@layer components {
+
+  /* Responsive Typography Utilities */
+  .text-responsive-xs {
+    font-size: var(--font-size-xs);
+  }
+
+  .text-responsive-sm {
+    font-size: var(--font-size-sm);
+  }
+
+  .text-responsive-base {
+    font-size: var(--font-size-base);
+  }
+
+  .text-responsive-lg {
+    font-size: var(--font-size-lg);
+  }
+
+  .text-responsive-xl {
+    font-size: var(--font-size-xl);
+  }
+
+  .text-responsive-2xl {
+    font-size: var(--font-size-2xl);
+  }
+
+  .text-responsive-3xl {
+    font-size: var(--font-size-3xl);
+  }
+
+  .text-responsive-4xl {
+    font-size: var(--font-size-4xl);
+  }
+
+  .text-responsive-5xl {
+    font-size: var(--font-size-5xl);
+  }
+
+  /* Content Typography Classes */
+  .prose-content p {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin-bottom: 1.25em;
+    color: hsl(var(--foreground));
+  }
+
+  .prose-content h1,
+  .prose-content h2,
+  .prose-content h3,
+  .prose-content h4,
+  .prose-content h5,
+  .prose-content h6 {
+    margin-top: 2em;
+    margin-bottom: 0.75em;
+  }
+
+  .prose-content h1:first-child,
+  .prose-content h2:first-child,
+  .prose-content h3:first-child {
+    margin-top: 0;
+  }
+
+  /* Button text sizing */
+  .btn-text-sm {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+  }
+
+  .btn-text-base {
+    font-size: var(--font-size-base);
+    font-weight: 500;
+  }
+}
+
+@layer utilities {
+
+  /* Text Shadow Utilities for Image Overlays */
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-shadow-md {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Light text shadows for subtle enhancement */
+  .text-shadow-light {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Dark mode text shadows */
+  .dark .text-shadow-light {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Overlay text for images and gradients */
+  .text-overlay {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    color: white;
+  }
+
+  /* Reading optimized text */
+  .text-reading {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    font-weight: 400;
+    color: hsl(var(--foreground));
+  }
+
+  /* Enhanced contrast text */
+  .text-high-contrast {
+    color: hsl(var(--foreground));
+    font-weight: 500;
+  }
+
+  .dark .text-high-contrast {
+    color: hsl(var(--foreground));
+    font-weight: 400;
+  }
+
+  /* Mobile-first responsive spacing */
+  .space-y-content>*+* {
+    margin-top: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .space-y-content>*+* {
+      margin-top: 1.5rem;
+    }
+  }
+}
+
+/* Pattern background with improved opacity for readability */
+.bg-pattern {
+  background-image: url('/patterns/blueprint.svg');
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: 30px 30px;
+  opacity: 0.03;
+}
+
+.dark .bg-pattern {
+  opacity: 0.05;
+}
+
+/* Enhanced text shadows for content over patterns */
+.text-content-shadow h1,
+.text-content-shadow h2,
+.text-content-shadow h3,
+.text-content-shadow p {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.dark .text-content-shadow h1,
+.dark .text-content-shadow h2,
+.dark .text-content-shadow h3,
+.dark .text-content-shadow p {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.pattern-background {
+  background-attachment: fixed !important;
+  transition: opacity 0.5s ease;
+}
+
+.interactive-pattern {
+  transition: transform 0.3s ease-out;
+}
+
+.text-content-shadow {
+  position: relative;
+  z-index: 1;
+}
+
+/* Font Family Utilities */
+.font-inter {
+  font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-source-code-pro), 'Source Code Pro', 'Consolas', 'Monaco', monospace;
+}
+
+/* Enhanced heading styles with new font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.015em;
+  font-weight: 600;
+  /* Heavier base weight for headings */
+}
+
+/* Code and preformatted text */
+code,
+pre,
+.code {
+  font-family: var(--font-source-code-pro), 'Source Code Pro', 'Consolas', 'Monaco', monospace;
+}
+
+/* Enhanced paragraph readability */
+p,
+.text-content {
+  font-weight: 450;
+  /* Slightly heavier for better readability */
+  line-height: 1.7;
+  /* Increased line height for easier reading */
+}
+
+/* Professional heading weights with better readability */
+.heading-display {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.heading-primary {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.heading-secondary {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+/* Enhanced text readability classes */
+.text-readable {
+  font-weight: 450;
+  line-height: 1.7;
+  letter-spacing: 0.005em;
+}
+
+.text-readable-dense {
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.003em;
+}
+
+/* Custom scrollbar styles for Table of Contents */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--border));
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--muted-foreground) / 0.4);
+}
+
+/* CV Button Attention Pulse Effect */
+@keyframes cv-button-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(251, 191, 36, 0);
+  }
+}
+
+.cv-button-attention {
+  animation: cv-button-pulse 2s ease-in-out infinite;
+}
+
+.cv-button-attention:hover {
+  animation-play-state: paused;
+}

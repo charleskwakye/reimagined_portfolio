@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Pre-commit hook - runs tests before allowing commits
+# This prevents broken code from being committed
+
+echo "🧪 Running tests before commit..."
+npm test
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ Tests failed! Commit aborted."
+  echo "   Fix the failing tests and try again:"
+  echo "   npm test            # Run all tests"
+  echo "   npm run test:watch  # Run tests in watch mode"
+  echo ""
+  exit 1
+fi
+
+echo "✅ All tests passed!"
+echo "📝 Proceeding with commit..."

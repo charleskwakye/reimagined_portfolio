@@ -1,0 +1,4 @@
+-- These tables and columns already exist in the database
+-- This migration is a no-op to sync migration history with database state
+-- UserPreference table exists with all proper constraints and indexes
+-- Certification.pdfUrl column exists

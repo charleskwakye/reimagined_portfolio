@@ -1,0 +1,2 @@
+-- This migration marks the addition of @updatedAt directive to Internship.updatedAt
+-- The column already exists, but now Prisma will automatically update it

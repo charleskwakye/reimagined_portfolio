@@ -1,0 +1,202 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model AboutSection {
+  id        String   @id
+  title     String
+  content   String
+  order     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  userId    String
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ApproachItem {
+  id          String   @id
+  title       String
+  description String
+  order       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  userId      String
+  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Certification {
+  id           String   @id @default(cuid())
+  title        String
+  organization String
+  year         String
+  url          String?
+  order        Int?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  userId       String
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Education {
+  id          String    @id
+  degree      String
+  institution String
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean   @default(false)
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  userId      String
+  User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Experience {
+  id          String    @id
+  title       String
+  company     String
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean   @default(false)
+  description String
+  order       Int?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime
+  userId      String
+  User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Internship {
+  id            String    @id
+  title         String
+  company       String
+  location      String?
+  startDate     DateTime
+  endDate       DateTime?
+  shortDesc     String
+  contentBlocks Json
+  technologies  String[]
+  testimonials  Json?
+  outcome       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime
+  userId        String
+  User          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Language {
+  id          String   @id
+  name        String
+  proficiency String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  userId      String
+  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Project {
+  id            String   @id
+  title         String
+  shortDesc     String
+  coverImage    String?
+  githubLink    String?
+  demoLink      String?
+  contentBlocks Json
+  technologies  String[]
+  featured      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime
+  userId        String
+  videoUrl      String?
+  order         Int      @default(0)
+  User          User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model SocialLink {
+  id        String   @id
+  platform  String
+  url       String
+  icon      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  userId    String
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Specialty {
+  id        String   @id
+  name      String
+  icon      String?
+  color     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  userId    String
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Tool {
+  id        String   @id
+  name      String
+  category  String
+  icon      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  userId    String
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String         @id
+  name          String
+  jobTitle      String
+  intro         String
+  about         String
+  profileImage  String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime
+  resumeUrl     String?
+  AboutSection  AboutSection[]
+  ApproachItem  ApproachItem[]
+  Certification Certification[]
+  Education     Education[]
+  Experience    Experience[]
+  Internship    Internship[]
+  Language      Language[]
+  Project       Project[]
+  SocialLink    SocialLink[]
+  Specialty     Specialty[]
+  Tool          Tool[]
+  UserPreferences UserPreference[]
+}
+
+// New model for storing user preferences like ordering without changing existing tables
+model UserPreference {
+  id        String   @id @default(cuid())
+  key       String   // e.g. "certification_order", "experience_order", "contact_info"
+  value     String   // JSON string with the preference data
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, key])
+  @@index([userId, key])
+}
+
+model logs {
+  id        Int      @id @default(autoincrement())
+  level     String   @db.VarChar(10)
+  message   String
+  timestamp DateTime @db.Timestamp(6)
+  metadata  Json?
+}

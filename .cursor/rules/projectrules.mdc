@@ -1,0 +1,234 @@
+---
+description: This document contains rules for a Next.js portfolio website using PostgreSQL on Neon and Vercel Blob Storage. It covers coding standards, component structure, database access, API design, and deployment processes. When using AI assistance like Cursor, only change the specific functionality requested and ask before making any additional modifications. Reference the documentation files (CONTENT_BLOCKS_GUIDE.md, TECHNICAL_GUIDE.md, and TROUBLESHOOTING.md) when needed to understand existing architecture. The content block system and other specialized features have these dedicated guide files for deeper context.
+globs: 
+alwaysApply: false
+---
+# Portfolio Project Rules
+
+This document outlines the core rules, guidelines, and standards for developing and maintaining this portfolio website. Following these rules ensures consistency, quality, and maintainability.
+
+## 🧩 Code Architecture
+
+### Component Design
+- Use the "single responsibility principle" for components
+- Maintain clear separation between server and client components
+- Server components should be the default choice unless client interactivity is needed
+- Avoid deep component nesting (aim for ≤4 levels deep)
+- Use appropriate folder structure:
+  - `/components` for reusable UI components
+  - `/app` for page components and routing
+  - `/lib` for utilities and helpers
+  - `/api` for API route handlers
+
+### State Management
+- Use React hooks for local component state
+- Avoid prop drilling by leveraging context where appropriate
+- Keep state as close as possible to where it's needed
+- Use `useReducer` for complex state logic
+
+## 🤖 AI Assistance Guidelines
+
+### Change Management
+- When requesting changes to specific functionality, Cursor should only modify code related to that functionality
+- Changes should be minimal and focused on addressing the specific request
+- No additional changes should be made beyond the scope of the request without explicit approval
+- If Cursor identifies beneficial changes outside the requested scope, it must ask for confirmation first
+- Reference documentation files when needed to understand the existing architecture
+
+### Code Generation
+- Generated code must follow all project standards and conventions
+- When multiple approaches are possible, Cursor should explain options and seek guidance
+- Generated code should include proper error handling and respect existing patterns
+- Avoid making changes that could introduce compatibility issues with other parts of the codebase
+
+## 💅 Code Style
+
+### General Practices
+- Follow TypeScript best practices with proper typing
+- Use functional components with hooks (no class components)
+- Keep files under 300 lines; consider splitting larger components
+- No commented-out code in production
+- Write self-documenting code with clear variable/function names
+
+### Naming Conventions
+- PascalCase for React components: `ProjectCard.tsx`
+- camelCase for functions and variables: `fetchProjects`
+- kebab-case for files that aren't components: `content-blocks.ts`
+- Use descriptive, intention-revealing names
+
+### Formatting
+- Use consistent indentation (2 spaces)
+- Follow ESLint and Prettier configurations
+- Organize imports logically and alphabetically
+- Group related CSS properties
+- Be consistent with quotes (prefer double quotes)
+
+## 🗃️ Database Guidelines
+
+### Infrastructure
+- The database is hosted on **Neon** - a serverless PostgreSQL platform
+- Production database credentials are managed through environment variables
+- Never connect to the production database directly from local development
+- Use the provided connection pooling URLs to optimize connection usage
+- Database backups are handled through Neon's automatic backup system
+
+### Schema Changes
+- Document all schema changes in migration files
+- Get team approval before modifying existing models
+- Run `npx prisma format` before committing schema changes
+- Add appropriate indexes for frequently queried fields
+- Use descriptive names for tables, columns, and relations
+- After schema changes, update the Prisma client: `npx prisma generate`
+
+### Data Access
+- Use Prisma as the sole method for database access
+- Keep database queries in API route handlers or server components
+- Use transactions for operations involving multiple tables
+- Handle potential database errors gracefully
+- Respect Neon's connection limits and optimize for serverless execution
+
+## 🚀 Development Workflow
+
+### Git Practices
+- Use feature branches for all changes: `feature/add-project-filtering`
+- Write clear, descriptive commit messages
+- Keep commits focused on single changes
+- Squash commits before merging to main branch
+- Never commit directly to main branch
+
+### Pull Requests
+- Create descriptive PR titles and descriptions
+- Reference related issues in PR descriptions
+- Keep PRs focused on a single feature or fix
+- Include screenshots for UI changes
+- Ensure all checks pass before requesting review
+
+## 🔄 API Design
+
+### Standards
+- Use RESTful principles for API endpoints
+- Maintain versioning for breaking changes
+- Return consistent response formats
+- Handle errors gracefully with appropriate status codes
+- Validate all input data
+
+### Security
+- Sanitize user inputs
+- Implement proper authorization checks
+- Use parameterized queries to prevent SQL injection
+- Set appropriate CORS headers
+- Don't expose sensitive information in responses
+
+## 🧪 Testing Standards
+
+### Requirements
+- Write unit tests for utilities and critical functions
+- Test all API endpoints
+- Test key user flows
+- Coverage should be at least 70% for core functionality
+- Run tests before committing changes
+
+### Test Organization
+- Co-locate tests with the code they test
+- Name test files with `.test.ts` or `.test.tsx` suffix
+- Use descriptive test names that explain expected behavior
+- Follow AAA pattern (Arrange, Act, Assert)
+
+## 📄 Documentation
+
+### Code Documentation
+- Add JSDoc comments for functions with complex logic
+- Document props for reusable components
+- Include examples for utilities with multiple use cases
+- Document non-obvious design decisions
+
+### Project Documentation
+- Keep README.md updated with current information
+- Document all environment variables
+- Maintain up-to-date technical documentation
+- Update docs when making significant changes
+
+## 🌐 Content Management
+
+### Content Blocks
+- Follow guidelines in CONTENT_BLOCKS_GUIDE.md
+- Validate content block structure before saving
+- Test new content block types thoroughly
+- Keep content block rendering consistent across devices
+
+### Media Assets
+- **All media is stored in Vercel Blob Storage** - never use local storage for production assets
+- Blob Storage credentials are managed through environment variables (`BLOB_READ_WRITE_TOKEN`)
+- Access media through the provided CDN URLs
+- Use the `/api/upload` endpoint for all file uploads
+- Set appropriate cache headers for optimized delivery
+- Compress images before uploading
+- Include appropriate alt text for accessibility
+- Follow the expiration policies for temporary vs. persistent storage
+
+## 🔍 Performance
+
+### Guidelines
+- Keep initial bundle size under 200KB
+- Optimize images and media
+- Implement pagination for large data sets
+- Use proper caching strategies
+- Minimize database queries
+- Use React.memo for expensive components
+
+### Monitoring
+- Test performance regularly on both desktop and mobile
+- Check Lighthouse scores before major releases
+- Address performance regressions promptly
+
+## ♿ Accessibility
+
+### Requirements
+- Maintain WCAG 2.1 AA compliance
+- Use semantic HTML elements
+- Ensure proper keyboard navigation
+- Maintain sufficient color contrast
+- Include aria attributes where appropriate
+- Test with screen readers periodically
+
+## 📱 Responsive Design
+
+### Guidelines
+- Use mobile-first approach
+- Test on all major breakpoints (mobile, tablet, desktop)
+- Ensure all features work on mobile devices
+- Use appropriate input types for mobile forms
+- Optimize load times for mobile connections
+
+## 🔒 Security
+
+### Practices
+- Keep dependencies updated
+- Implement proper authentication and authorization
+- Don't store sensitive data in client-side storage
+- Use HTTPS for all requests
+- Validate and sanitize all user inputs
+- Protect sensitive environment variables in Vercel dashboard
+- Rotate Neon database credentials and Blob Storage tokens periodically
+
+## 🚀 Deployment
+
+### Infrastructure
+- The application is deployed on **Vercel**
+- Database is hosted on **Neon** (PostgreSQL)
+- Media assets are stored in **Vercel Blob Storage**
+- Environment variables are managed through the Vercel dashboard
+
+### Process
+- Test changes locally before deployment
+- Use staging environment for final testing
+- Monitor errors and performance after deployment
+- Have a rollback plan for major changes
+- Document deployment steps for new developers
+
+## References
+
+For more detailed information, refer to these project documentation files:
+- [CONTENT_BLOCKS_GUIDE.md](mdc:CONTENT_BLOCKS_GUIDE.md) - Details on the content block system
+- [TECHNICAL_GUIDE.md](mdc:TECHNICAL_GUIDE.md) - Technical architecture and implementation details
+- [TROUBLESHOOTING.md](mdc:TROUBLESHOOTING.md) - Solutions for common issues 
