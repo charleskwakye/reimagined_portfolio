@@ -1,0 +1,268 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "CK Charles Kwakye" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e7]: CK
+        - generic [ref=e8]:
+          - generic [ref=e9]: Charles
+          - generic [ref=e10]: Kwakye
+      - navigation [ref=e11]:
+        - link "Home" [ref=e12] [cursor=pointer]:
+          - /url: /
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: /about
+        - link "Projects" [ref=e14] [cursor=pointer]:
+          - /url: /projects
+        - link "Internship" [ref=e15] [cursor=pointer]:
+          - /url: /internship
+        - link "Contact" [ref=e16] [cursor=pointer]:
+          - /url: /contact
+      - generic [ref=e17]:
+        - link "CV" [ref=e18] [cursor=pointer]:
+          - /url: /cv
+          - img [ref=e19]
+          - text: CV
+        - button "Select language" [ref=e23] [cursor=pointer]:
+          - img [ref=e24]
+          - generic [ref=e27]: EN
+          - img [ref=e28]
+        - button "Switch to dark mode" [ref=e30] [cursor=pointer]:
+          - img [ref=e31]
+  - main [ref=e33]:
+    - generic [ref=e34]:
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43]:
+              - img [ref=e44]
+              - generic [ref=e47]: Available for opportunities
+            - heading "Hi, I'm Charles Nana Kwakye" [level=1] [ref=e48]
+            - paragraph [ref=e49]: Data Engineer
+          - paragraph [ref=e50]: Driven by a passion for data, I design and implement efficient data solutions, from conducting feasibility studies with LLMs to creating detailed Entity Relationship Diagrams. I am dedicated to transforming complex data into clear, valuable insights.
+          - generic [ref=e51]:
+            - link "View Projects" [ref=e52] [cursor=pointer]:
+              - /url: /projects
+              - text: View Projects
+              - img [ref=e53]
+            - link "Get in Touch" [ref=e55] [cursor=pointer]:
+              - /url: /contact
+          - generic [ref=e56]:
+            - link "linkedin LinkedIn" [ref=e57] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/charles-nana-kwakye-b3992a20b/
+              - text: linkedin
+              - generic [ref=e58]: LinkedIn
+            - link "github GitHub" [ref=e59] [cursor=pointer]:
+              - /url: https://github.com/charleskwakye
+              - text: github
+              - generic [ref=e60]: GitHub
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic [ref=e66]: Loading...
+                  - generic:
+                    - img "Charles Nana Kwakye"
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - generic [ref=e72]: 3+
+          - paragraph [ref=e73]: Projects Completed
+        - generic [ref=e74]:
+          - generic [ref=e75]: 7+
+          - paragraph [ref=e76]: Certifications
+        - generic [ref=e77]:
+          - generic [ref=e78]: 3+
+          - paragraph [ref=e79]: Languages Spoken
+        - generic [ref=e80]:
+          - generic [ref=e81]: 100%
+          - paragraph [ref=e82]: Commitment
+      - generic [ref=e85]:
+        - generic [ref=e86]:
+          - heading "Featured Projects" [level=2] [ref=e87]
+          - paragraph [ref=e88]: A selection of my recent work and personal projects
+        - link "View All Projects" [ref=e90] [cursor=pointer]:
+          - /url: /projects
+          - text: View All Projects
+          - img [ref=e91]
+        - generic [ref=e93]:
+          - article [ref=e94]:
+            - 'img "Real-World Brazil E-Commerce Data Lakehouse: Production-Grade Engineering on Azure Databricks" [ref=e97]'
+            - generic [ref=e98]:
+              - generic [ref=e99]:
+                - 'heading "Real-World Brazil E-Commerce Data Lakehouse: Production-Grade Engineering on Azure Databricks" [level=3] [ref=e100]'
+                - img [ref=e101]
+              - paragraph [ref=e104]: Built a production-ready medallion architecture data lakehouse on Azure Databricks that transforms 100,000+ raw e-commerce records into business-ready analytics. Demonstrates real-world data engineering challenges including data relationship complexity, incremental processing, and cost-effective cloud architecture—all delivered on a student budget with enterprise-quality patterns.
+              - generic [ref=e105]:
+                - generic [ref=e106]: Azure Cloud
+                - generic [ref=e107]: Databricks
+                - generic [ref=e108]: Unity Catalog
+                - generic [ref=e109]: "+3"
+              - generic [ref=e110]:
+                - link "Code" [ref=e111] [cursor=pointer]:
+                  - /url: https://github.com/charleskwakye/brazil-ecommerce-git
+                  - img [ref=e112]
+                  - text: Code
+                - link "View Details" [ref=e114] [cursor=pointer]:
+                  - /url: /projects/cmfwzir1i0001l104polu3ncn
+                  - text: View Details
+                  - img [ref=e115]
+          - article [ref=e117]:
+            - img "Business Process Analysis & Modelling of the 'Hire to Retire' Process at Aluminium Duffel" [ref=e120]
+            - generic [ref=e121]:
+              - generic [ref=e122]:
+                - heading "Business Process Analysis & Modelling of the 'Hire to Retire' Process at Aluminium Duffel" [level=3] [ref=e123]
+                - img [ref=e124]
+              - paragraph [ref=e127]: This project involved analysing and modelling the "Hire to Retire" HR process at Aluminium Duffel, a major aluminium manufacturer in Belgium.
+              - generic [ref=e128]:
+                - generic [ref=e129]: BPMN
+                - generic [ref=e130]: Word
+                - generic [ref=e131]: Teams
+              - link "View Details" [ref=e133] [cursor=pointer]:
+                - /url: /projects/cme20pd9l0001l104jq9wiljy
+                - text: View Details
+                - img [ref=e134]
+          - article [ref=e136]:
+            - img "Belgium Insurance Claim Severity AI Project" [ref=e139]
+            - generic [ref=e140]:
+              - generic [ref=e141]:
+                - heading "Belgium Insurance Claim Severity AI Project" [level=3] [ref=e142]
+                - img [ref=e143]
+              - paragraph [ref=e146]: End-to-end Machine Learning pipeline designed to predict individual motor insurance claim severity using 70,000+ Belgian insurance records.
+              - generic [ref=e147]:
+                - generic [ref=e148]: Python
+                - generic [ref=e149]: scikit-learn
+                - generic [ref=e150]: XGBoost
+                - generic [ref=e151]: "+5"
+              - generic [ref=e152]:
+                - link "Code" [ref=e153] [cursor=pointer]:
+                  - /url: https://github.com/charleskwakye/be-insurance-ai
+                  - img [ref=e154]
+                  - text: Code
+                - link "Live Demo" [ref=e156] [cursor=pointer]:
+                  - /url: https://belgian-mtpl-claim-severity.streamlit.app/
+                  - img [ref=e157]
+                  - text: Live Demo
+                - link "View Details" [ref=e161] [cursor=pointer]:
+                  - /url: /projects/cml06dzxx00014iqmw7anbs4f
+                  - text: View Details
+                  - img [ref=e162]
+      - generic [ref=e166]:
+        - generic [ref=e167]:
+          - heading "Languages" [level=2] [ref=e168]
+          - paragraph [ref=e169]: Communication is key to collaboration
+        - generic [ref=e170]:
+          - generic [ref=e171]:
+            - generic [ref=e173]: E
+            - heading "English" [level=3] [ref=e174]
+            - paragraph [ref=e175]: Fluent
+          - generic [ref=e176]:
+            - generic [ref=e178]: D
+            - heading "Dutch" [level=3] [ref=e179]
+            - paragraph [ref=e180]: Basic
+          - generic [ref=e181]:
+            - generic [ref=e183]: T
+            - heading "Twi" [level=3] [ref=e184]
+            - paragraph [ref=e185]: Native
+      - generic [ref=e188]:
+        - generic [ref=e189]:
+          - heading "Certifications" [level=2] [ref=e190]
+          - paragraph [ref=e191]: Professional development and continuous learning
+        - generic [ref=e192]:
+          - generic [ref=e193]:
+            - img [ref=e195]
+            - generic [ref=e198]:
+              - 'heading "Microsoft Certified: Fabric Data Engineer Associate" [level=3] [ref=e199]'
+              - paragraph [ref=e200]: Microsoft
+              - paragraph [ref=e201]: "2026"
+          - generic [ref=e202]:
+            - img [ref=e204]
+            - generic [ref=e207]:
+              - heading "Databricks Fundamentals" [level=3] [ref=e208]
+              - paragraph [ref=e209]: Databricks
+              - paragraph [ref=e210]: "2025"
+          - generic [ref=e211]:
+            - img [ref=e213]
+            - generic [ref=e216]:
+              - 'heading "Microsoft Certified: Azure Data Fundamentals" [level=3] [ref=e217]'
+              - paragraph [ref=e218]: Microsoft
+              - paragraph [ref=e219]: "2025"
+          - generic [ref=e220]:
+            - img [ref=e222]
+            - generic [ref=e225]:
+              - 'heading "Azure Databricks & Spark For Data Engineers: Hands-on Project" [level=3] [ref=e226]'
+              - paragraph [ref=e227]: Udemy
+              - paragraph [ref=e228]: "2025"
+          - generic [ref=e229]:
+            - img [ref=e231]
+            - generic [ref=e234]:
+              - heading "Qlik Sense Business Analyst Qualification" [level=3] [ref=e235]
+              - paragraph [ref=e236]: Qlik
+              - paragraph [ref=e237]: "2025"
+          - generic [ref=e238]:
+            - img [ref=e240]
+            - generic [ref=e243]:
+              - heading "Microsoft Azure for Databricks" [level=3] [ref=e244]
+              - paragraph [ref=e245]: Coursera
+              - paragraph [ref=e246]: "2023"
+        - link "View All Certifications" [ref=e248] [cursor=pointer]:
+          - /url: /certifications
+          - text: View All Certifications
+          - img [ref=e249]
+      - generic [ref=e253]:
+        - heading "Let's Work Together" [level=2] [ref=e254]
+        - paragraph [ref=e255]: I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+        - generic [ref=e256]:
+          - link "Get in Touch" [ref=e257] [cursor=pointer]:
+            - /url: /contact
+            - img [ref=e258]
+            - text: Get in Touch
+          - link "Download CV" [ref=e261] [cursor=pointer]:
+            - /url: /cv
+            - img [ref=e262]
+            - text: Download CV
+  - contentinfo [ref=e265]:
+    - generic [ref=e266]:
+      - generic [ref=e267]:
+        - generic [ref=e268]:
+          - generic [ref=e269]:
+            - generic [ref=e271]: CK
+            - generic [ref=e272]:
+              - generic [ref=e273]: Charles
+              - generic [ref=e274]: Kwakye
+          - paragraph [ref=e275]: A showcase of my skills, projects, and professional experience.
+        - generic [ref=e276]:
+          - heading "Quick Links" [level=3] [ref=e277]
+          - list [ref=e278]:
+            - listitem [ref=e279]:
+              - link "Home" [ref=e280] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e281]:
+              - link "About" [ref=e282] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e283]:
+              - link "Projects" [ref=e284] [cursor=pointer]:
+                - /url: /projects
+            - listitem [ref=e285]:
+              - link "Internship" [ref=e286] [cursor=pointer]:
+                - /url: /internship
+            - listitem [ref=e287]:
+              - link "Contact" [ref=e288] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=e289]:
+          - heading "Connect" [level=3] [ref=e290]
+          - generic [ref=e291]:
+            - link "LinkedIn" [ref=e292] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/charles-nana-kwakye-b3992a20b/
+              - img [ref=e293]
+            - link "GitHub" [ref=e297] [cursor=pointer]:
+              - /url: https://github.com/charleskwakye
+              - img [ref=e298]
+      - generic [ref=e300]:
+        - paragraph [ref=e301]: © 2026 Charles Kwakye. All rights reserved.
+        - button "Scroll to top" [ref=e302] [cursor=pointer]:
+          - img [ref=e303]
+          - text: Back to top
+  - button "Open Next.js Dev Tools" [ref=e310] [cursor=pointer]:
+    - img [ref=e311]
+  - alert [ref=e314]
