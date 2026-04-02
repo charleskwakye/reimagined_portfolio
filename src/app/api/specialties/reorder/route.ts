@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getUserPreference, setUserPreference } from '@/lib/userPreferences';
 import { prisma } from '@/lib/db';
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {

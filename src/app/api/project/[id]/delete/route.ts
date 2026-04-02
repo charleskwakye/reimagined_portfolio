@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { del } from '@vercel/blob';
 import { revalidatePath } from 'next/cache';
+export const dynamic = 'force-dynamic';
 
 // Helper function to extract URLs from content blocks
 function extractUrlsFromContentBlocks(contentBlocks: any[]) {

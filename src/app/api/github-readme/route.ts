@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { githubCache, parseGitHubUrl, transformImageUrls } from '@/lib/github-cache';
+export const dynamic = 'force-dynamic';
 
 interface RequestBody {
   repoUrl: string;

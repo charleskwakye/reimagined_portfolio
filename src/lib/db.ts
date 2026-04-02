@@ -4,18 +4,29 @@ import { PrismaClient } from '@prisma/client';
 // exhausting your database connection limit.
 // Learn more: https://pris.ly/d/help/next-js-best-practices
 
-// Add retry and connection timeout settings for serverless database
-const prismaClientSingleton = () => {
-  return new PrismaClient({
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
+
+// Only create Prisma client if DATABASE_URL is available (not during build without env)
+let prismaInstance: PrismaClient | undefined;
+
+function getPrismaClient(): PrismaClient | undefined {
+  if (!process.env.DATABASE_URL) {
+    return undefined;
+  }
+  
+  if (globalForPrisma.prisma) {
+    return globalForPrisma.prisma;
+  }
+
+  prismaInstance = new PrismaClient({
     log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
-    // Add connection handling options for serverless databases like Neon
     datasources: {
       db: {
         url: process.env.DATABASE_URL,
       },
     },
-    // Add retry logic to handle transient connection errors
-    // Especially important for serverless environments
     errorFormat: 'minimal',
   }).$extends({
     query: {
@@ -32,7 +43,6 @@ const prismaClientSingleton = () => {
             lastError = e;
             const error = e as Error;
 
-            // Only retry on connection errors or deadlocks
             if (
               error.message.includes('Connection') ||
               error.message.includes('terminated') ||
@@ -40,37 +50,32 @@ const prismaClientSingleton = () => {
               error.message.includes('deadlock')
             ) {
               retries++;
-              // Exponential backoff
               const delay = Math.min(100 * 2 ** retries, 1000);
               await new Promise((resolve) => setTimeout(resolve, delay));
             } else {
-              // Non-connection errors shouldn't be retried
               throw error;
             }
           }
         }
 
-        // If we've exhausted all retries, throw the last error
         throw lastError;
       },
     },
   });
-};
 
-type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
+  if (process.env.NODE_ENV !== 'production') {
+    globalForPrisma.prisma = prismaInstance;
+  }
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClientSingleton | undefined;
-};
+  return prismaInstance;
+}
 
-export const prisma = globalForPrisma.prisma ?? prismaClientSingleton();
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+export const prisma = getPrismaClient();
 
 // Add a connection check function to verify database connectivity
 export async function checkDbConnection() {
   try {
-    // Run a simple query to check connection
+    if (!prisma) return false;
     await prisma.$queryRaw`SELECT 1`;
     return true;
   } catch (error) {

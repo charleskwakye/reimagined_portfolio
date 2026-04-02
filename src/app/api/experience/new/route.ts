@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import cuid from 'cuid';
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   try {

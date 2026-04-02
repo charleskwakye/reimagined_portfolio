@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getUserLanguages } from '@/lib/actions/user';
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {

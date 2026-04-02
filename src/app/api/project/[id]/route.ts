@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { getProjectById } from '@/lib/actions/user';
 import { del } from '@vercel/blob';
+export const dynamic = 'force-dynamic';
 
 // Helper function to extract URLs from content blocks
 function extractUrlsFromContentBlocks(contentBlocks: any[]) {

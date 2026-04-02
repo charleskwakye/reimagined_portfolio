@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { buildPartialUpdatePayload } from '@/lib/utils';
+export const dynamic = 'force-dynamic';
 
 interface ProjectUpdateBody {
   title?: string;

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
+export const dynamic = 'force-dynamic';
 
 export async function DELETE(
   request: Request,

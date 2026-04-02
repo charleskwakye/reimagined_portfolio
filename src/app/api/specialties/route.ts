@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getUserSpecialties } from '@/lib/actions/user';
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {

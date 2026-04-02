@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/db';
 import { setCertificationOrder, getCertificationOrder } from '@/lib/userPreferences';
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
