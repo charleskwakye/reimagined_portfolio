@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiGlobe, FiInstagram, FiFacebook, FiArrowUp } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiGlobe, FiInstagram, FiFacebook, FiArrowUp, FiTerminal } from 'react-icons/fi';
 import { useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -55,17 +55,17 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-border">
+    <footer className="border-t border-border/50 bg-card/30">
       <div className="container px-6 md:px-12 py-16">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             {/* Brand */}
             <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-primary flex items-center justify-center rounded-sm">
-                  <span className="text-primary-foreground font-serif text-sm font-bold">CK</span>
+                <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                  <FiTerminal className="h-4 w-4 text-primary" />
                 </div>
-                <span className="font-serif text-lg">Charles Kwakye</span>
+                <span className="font-display font-bold text-lg">Charles<span className="text-primary">.</span></span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
                 {t('footer.portfolio_desc')}
@@ -74,7 +74,7 @@ export function Footer() {
 
             {/* Navigation */}
             <div>
-              <h3 className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-6">Navigation</h3>
+              <h3 className="text-xs font-mono tracking-[0.2em] uppercase text-primary mb-6">Navigation</h3>
               <ul className="space-y-3">
                 {[
                   { label: t('nav.home'), href: '/' },
@@ -94,7 +94,7 @@ export function Footer() {
 
             {/* Social */}
             <div>
-              <h3 className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-6">Connect</h3>
+              <h3 className="text-xs font-mono tracking-[0.2em] uppercase text-primary mb-6">Connect</h3>
               <div className="flex flex-wrap gap-3">
                 {links.map((link) => {
                   const IconComponent = iconMap[link.platform.toLowerCase()] || FiGlobe;
@@ -104,7 +104,7 @@ export function Footer() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-sm border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+                      className="w-10 h-10 rounded-lg border border-border/50 bg-card/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
                       aria-label={link.platform}
                     >
                       <IconComponent className="h-4 w-4" />
@@ -116,13 +116,13 @@ export function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border">
-            <p className="text-xs text-muted-foreground tracking-wide">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border/50">
+            <p className="text-xs font-mono text-muted-foreground tracking-wider">
               &copy; {year || '2024'} Charles Kwakye. All rights reserved.
             </p>
             <button
               onClick={scrollToTop}
-              className="inline-flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors tracking-wide uppercase"
+              className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground hover:text-primary transition-colors tracking-wider uppercase"
               aria-label="Scroll to top"
             >
               Back to top
