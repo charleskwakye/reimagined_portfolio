@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiGlobe, FiInstagram, FiFacebook, FiArrowUp, FiTerminal } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiGlobe, FiInstagram, FiFacebook } from 'react-icons/fi';
 import { useEffect, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -43,10 +43,6 @@ export function Footer() {
     fetchSocialLinks();
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const links = socialLinks.length > 0 ? socialLinks : [
     { id: '1', platform: 'github', url: 'https://github.com' },
     { id: '2', platform: 'linkedin', url: 'https://linkedin.com' },
@@ -55,36 +51,30 @@ export function Footer() {
   ];
 
   return (
-    <footer className="border-t border-border/50 bg-card/30">
-      <div className="container px-6 md:px-12 py-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+    <footer className="border-t border-border/50">
+      <div className="container px-6 md:px-8 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             {/* Brand */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                  <FiTerminal className="h-4 w-4 text-primary" />
-                </div>
-                <span className="font-display font-bold text-lg">Charles<span className="text-primary">.</span></span>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+            <div className="col-span-2 md:col-span-1">
+              <h3 className="text-sm font-semibold mb-3">{t('footer.portfolio') || 'Charles Kwakye'}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {t('footer.portfolio_desc')}
               </p>
             </div>
 
             {/* Navigation */}
             <div>
-              <h3 className="text-xs font-mono tracking-[0.2em] uppercase text-primary mb-6">Navigation</h3>
-              <ul className="space-y-3">
+              <h3 className="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-wider">Navigation</h3>
+              <ul className="space-y-2.5">
                 {[
                   { label: t('nav.home'), href: '/' },
                   { label: t('nav.about'), href: '/about' },
                   { label: t('nav.projects'), href: '/projects' },
-                  { label: t('nav.internship'), href: '/internship' },
                   { label: t('nav.contact'), href: '/contact' },
                 ].map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                       {link.label}
                     </Link>
                   </li>
@@ -93,8 +83,8 @@ export function Footer() {
             </div>
 
             {/* Social */}
-            <div>
-              <h3 className="text-xs font-mono tracking-[0.2em] uppercase text-primary mb-6">Connect</h3>
+            <div className="col-span-2 md:col-span-2">
+              <h3 className="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-wider">Connect</h3>
               <div className="flex flex-wrap gap-3">
                 {links.map((link) => {
                   const IconComponent = iconMap[link.platform.toLowerCase()] || FiGlobe;
@@ -104,7 +94,7 @@ export function Footer() {
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-lg border border-border/50 bg-card/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
+                      className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
                       aria-label={link.platform}
                     >
                       <IconComponent className="h-4 w-4" />
@@ -116,18 +106,13 @@ export function Footer() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border/50">
-            <p className="text-xs font-mono text-muted-foreground tracking-wider">
-              &copy; {year || '2024'} Charles Kwakye. All rights reserved.
+          <div className="pt-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-muted-foreground">
+              Copyright &copy; {year || '2024'} {t('footer.portfolio') || 'Charles Kwakye'}. {t('footer.rights')}
             </p>
-            <button
-              onClick={scrollToTop}
-              className="inline-flex items-center gap-2 text-xs font-mono text-muted-foreground hover:text-primary transition-colors tracking-wider uppercase"
-              aria-label="Scroll to top"
-            >
-              Back to top
-              <FiArrowUp className="h-3 w-3" />
-            </button>
+            <p className="text-xs text-muted-foreground">
+              Designed & built with care
+            </p>
           </div>
         </div>
       </div>
