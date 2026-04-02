@@ -28,29 +28,29 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section - Apple style: centered, clean, spacious */}
-      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32">
+      <section className="relative pt-24 pb-16 md:pt-36 md:pb-24">
         <div className="container px-6 md:px-8">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-3xl mx-auto text-center">
             {/* Eyebrow */}
-            <p className="text-sm font-medium text-muted-foreground mb-6 animate-fade-in">
+            <p className="text-sm font-medium text-muted-foreground mb-4 animate-fade-in">
               Data Engineer & Developer
             </p>
             
             {/* Main heading */}
-            <h1 className="animate-slide-up">
+            <h1 className="animate-slide-up tracking-tight">
               {userName}
             </h1>
             
             {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-muted-foreground font-normal max-w-2xl mx-auto mb-10 animate-slide-up stagger-2 leading-relaxed">
+            <p className="text-lg md:text-xl text-muted-foreground font-normal max-w-xl mx-auto mb-8 animate-slide-up stagger-2 leading-relaxed">
               {userIntro}
             </p>
             
             {/* CTA */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up stagger-3">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center animate-slide-up stagger-3">
               <Link href="/projects" className="btn-primary">
                 View Projects
-                <FiArrowRight className="h-4 w-4" />
+                <FiArrowRight className="h-3.5 w-3.5" />
               </Link>
               <Link href="/contact" className="btn-secondary">
                 Contact Me
@@ -58,7 +58,7 @@ export default async function Home() {
             </div>
             
             {/* Social links */}
-            <div className="flex items-center justify-center gap-6 mt-12 animate-slide-up stagger-4">
+            <div className="flex items-center justify-center gap-5 mt-10 animate-slide-up stagger-4">
               {user?.SocialLink?.map((link) => {
                 const getIcon = (platform: string, customIcon?: string) => {
                   if (customIcon) return <span className="text-lg">{customIcon}</span>;
