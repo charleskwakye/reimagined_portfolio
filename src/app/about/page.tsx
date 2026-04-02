@@ -1,12 +1,10 @@
-import Image from 'next/image';
 import {
   FiMapPin, FiCalendar, FiBookOpen, FiHeart, FiMessageSquare,
-  FiCode, FiLayout, FiEdit3
+  FiCode, FiLayout, FiEdit3, FiArrowRight
 } from 'react-icons/fi';
+import Link from 'next/link';
 import { getUserProfile, getUserSpecialties, getUserAboutSections, getUserApproachItems, getUserLanguages } from '@/lib/actions/user';
 import ProfileImage from '@/components/ProfileImage';
-import BackgroundPattern from '@/components/BackgroundPattern';
-import ContentCard from '@/components/ContentCard';
 import { Specialty, AboutSection, ApproachItem } from '@/lib/types';
 
 // Static generation for instant page loads - revalidated on-demand via admin
@@ -14,14 +12,12 @@ export const dynamic = 'force-static';
 
 // Helper function to extract metadata from about text
 function extractMetadataFromAbout(aboutText: string, key: string): string {
-  // This is a simple extraction method - you can make it more sophisticated if needed
   const regex = new RegExp(`<!-- ${key}:(.*?)-->`, 'i');
   const match = aboutText.match(regex);
   return match ? match[1].trim() : '';
 }
 
 export default async function AboutPage() {
-  // Fetch all data in parallel for better performance
   const [user, specialties, aboutSections, approachItems, languages] = await Promise.all([
     getUserProfile(),
     getUserSpecialties(),
@@ -30,16 +26,11 @@ export default async function AboutPage() {
     getUserLanguages()
   ]);
 
-  // Sort about sections by order
   const sortedAboutSections = aboutSections?.sort((a: AboutSection, b: AboutSection) => a.order - b.order) || [];
-
-  // Sort approach items by order
   const sortedApproachItems = approachItems?.sort((a: ApproachItem, b: ApproachItem) => a.order - b.order) || [];
 
-  // Extract quick facts from user.about
   const userAbout = user?.about || '';
 
-  // Format languages from database
   const formattedLanguages = languages && languages.length > 0
     ? languages.map(lang => `${lang.name} (${lang.proficiency})`).join(', ')
     : 'English, Spanish';
@@ -52,187 +43,188 @@ export default async function AboutPage() {
     languages: formattedLanguages
   };
 
+  const userName = user?.name || 'Charles Kwakye';
+  const userTitle = user?.jobTitle || 'Full Stack Developer';
+  const initials = userName.split(' ').map(n => n[0]).join('').toUpperCase();
+
   return (
-    <BackgroundPattern>
-      <div className="flex flex-col min-h-screen">
-        <div className="container px-4 py-12 md:px-6 md:py-20 mx-auto">
-          <div className="mb-12">
-            <div className="max-w-4xl mx-auto">
-              <ContentCard className="p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-12 items-center">
-                <div className="w-full max-w-[250px] mx-auto md:mx-0">
-                  {user?.profileImage ? (
-                    <ProfileImage
-                      src={user.profileImage}
-                      alt={user?.name || "Profile picture"}
-                      size="xl"
-                      style="glow"
-                      responsive
-                    />
-                  ) : (
-                    <div className="aspect-square bg-muted rounded-full flex items-center justify-center">
-                      <span className="text-4xl font-bold text-muted-foreground">
-                        {user?.name?.charAt(0) || "J"}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <div className="text-center md:text-left">
-                  <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl">{user?.name || "John Doe"}</h1>
-                  <p className="mt-2 text-xl text-muted-foreground">{user?.jobTitle || "Full Stack Developer"}</p>
-                  <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
-                    {specialties && specialties.length > 0 ? (
-                      specialties.map((specialty: Specialty) => {
-                        // Use inline styles for color instead of Tailwind classes
-                        const bgColorStyle = {
-                          backgroundColor: specialty.color ? `${specialty.color}20` : 'rgba(59, 130, 246, 0.1)',
-                          color: specialty.color || 'rgb(59, 130, 246)'
-                        };
-                        return (
-                          <span
-                            key={specialty.id}
-                            className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium"
-                            style={bgColorStyle}
-                          >
-                            <FiMessageSquare className="h-3 w-3" />
-                            {specialty.name}
-                          </span>
-                        );
-                      })
-                    ) : (
-                      <>
-                        <span className="inline-flex items-center gap-1 rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
-                          <FiCode className="h-3 w-3" /> Web Development
-                        </span>
-                        <span className="inline-flex items-center gap-1 rounded-md bg-blue-500/10 px-2 py-1 text-xs font-medium text-blue-500">
-                          <FiLayout className="h-3 w-3" /> UX Design
-                        </span>
-                        <span className="inline-flex items-center gap-1 rounded-md bg-purple-500/10 px-2 py-1 text-xs font-medium text-purple-500">
-                          <FiEdit3 className="h-3 w-3" /> Mobile Apps
-                        </span>
-                      </>
-                    )}
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-grid opacity-[0.4]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
+        
+        <div className="container px-4 md:px-6 relative">
+          <div className="max-w-5xl mx-auto">
+            <div className="card p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+              <div className="w-full max-w-[250px] mx-auto md:mx-0 flex-shrink-0">
+                {user?.profileImage ? (
+                  <ProfileImage
+                    src={user.profileImage}
+                    alt={userName}
+                    size="xl"
+                    style="elegant"
+                    responsive
+                    className="rounded-2xl shadow-xl"
+                  />
+                ) : (
+                  <div className="bg-gradient-to-br from-primary/10 to-purple-500/10 aspect-square flex items-center justify-center rounded-2xl border-2 border-primary/20 shadow-xl">
+                    <span className="text-5xl font-extrabold gradient-text">{initials}</span>
                   </div>
-                </div>
-              </ContentCard>
-
-              {/* About Sections - Enhanced with visual styling */}
-              {sortedAboutSections && sortedAboutSections.length > 0 ? (
-                <div className="mt-12 space-y-12">
-                  {sortedAboutSections.map((section: AboutSection, index: number) => (
-                    <ContentCard
-                      key={section.id}
-                      className={`p-8 md:p-12 border rounded-lg shadow-sm ${index % 2 === 0 ? 'bg-card' : 'bg-muted/30'}`}
-                    >
-                      <div className="flex items-center mb-6 pb-4 border-b">
-                        <h2 className="text-2xl font-bold">{section.title}</h2>
-                      </div>
-                      <div className="prose dark:prose-invert max-w-none">
-                        <div dangerouslySetInnerHTML={{ __html: section.content }} />
-                      </div>
-                    </ContentCard>
-                  ))}
-                </div>
-              ) : (
-                <></>
-              )}
-
-              {/* My Approach Section - Enhanced with visual styling */}
-              <ContentCard className="mt-12 p-8 md:p-12 border rounded-lg shadow-sm bg-muted/30">
-                <div className="flex items-center mb-6 pb-4 border-b">
-                  <h2 className="text-2xl font-bold">My Approach</h2>
-                </div>
-                <div className="grid gap-8 md:grid-cols-2">
-                  {sortedApproachItems && sortedApproachItems.length > 0 ? (
-                    sortedApproachItems.map((item: ApproachItem) => (
-                      <div key={item.id} className="bg-card p-6 rounded-lg border shadow-sm">
-                        <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
-                        <p className="text-muted-foreground">{item.description}</p>
-                      </div>
+                )}
+              </div>
+              <div className="text-center md:text-left">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">{userName}</h1>
+                <p className="mt-2 text-xl text-muted-foreground font-medium">{userTitle}</p>
+                <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
+                  {specialties && specialties.length > 0 ? (
+                    specialties.map((specialty: Specialty) => (
+                      <span
+                        key={specialty.id}
+                        className="inline-flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium bg-accent text-accent-foreground"
+                        style={{
+                          backgroundColor: specialty.color ? `${specialty.color}15` : undefined,
+                          color: specialty.color || undefined
+                        }}
+                      >
+                        <FiMessageSquare className="h-3 w-3" />
+                        {specialty.name}
+                      </span>
                     ))
                   ) : (
                     <>
-                      <div className="bg-card p-6 rounded-lg border shadow-sm">
-                        <h3 className="text-xl font-semibold mb-3">User-Centered Design</h3>
-                        <p className="text-muted-foreground">
-                          I prioritize user experience in everything I build. Understanding user needs and behaviors is essential to creating
-                          intuitive and effective solutions.
-                        </p>
-                      </div>
-                      <div className="bg-card p-6 rounded-lg border shadow-sm">
-                        <h3 className="text-xl font-semibold mb-3">Clean & Maintainable Code</h3>
-                        <p className="text-muted-foreground">
-                          Writing clean, well-documented, and maintainable code is a core principle in my development process. I believe
-                          good code should be readable and scalable.
-                        </p>
-                      </div>
-                      <div className="bg-card p-6 rounded-lg border shadow-sm">
-                        <h3 className="text-xl font-semibold mb-3">Continuous Learning</h3>
-                        <p className="text-muted-foreground">
-                          The tech landscape is always evolving, and I'm committed to staying current with the latest tools,
-                          frameworks, and best practices in web development.
-                        </p>
-                      </div>
-                      <div className="bg-card p-6 rounded-lg border shadow-sm">
-                        <h3 className="text-xl font-semibold mb-3">Collaborative Process</h3>
-                        <p className="text-muted-foreground">
-                          I value open communication and collaboration. Working closely with clients and team members ensures that
-                          we create solutions that meet everyone's needs.
-                        </p>
-                      </div>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-accent text-accent-foreground px-3 py-1.5 text-xs font-medium">
+                        <FiCode className="h-3 w-3" /> Web Development
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-accent text-accent-foreground px-3 py-1.5 text-xs font-medium">
+                        <FiLayout className="h-3 w-3" /> UX Design
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-accent text-accent-foreground px-3 py-1.5 text-xs font-medium">
+                        <FiEdit3 className="h-3 w-3" /> Mobile Apps
+                      </span>
                     </>
                   )}
                 </div>
-              </ContentCard>
-
-              {/* Keep Quick Facts as is */}
-              <BackgroundPattern interactive={true}>
-                <ContentCard className="mt-12 p-8 md:p-12 border rounded-lg shadow-sm">
-                  <div className="flex items-center mb-6 pb-4 border-b">
-                    <h2 className="text-2xl font-bold">Quick Facts</h2>
-                  </div>
-                  <div className="grid gap-6 md:grid-cols-2">
-                    <div className="flex items-center space-x-3">
-                      <FiMapPin className="flex-shrink-0 h-5 w-5 text-primary" />
-                      <div>
-                        <h3 className="text-responsive-sm font-medium">Location</h3>
-                        <p className="text-responsive-xs text-muted-foreground">{quickFacts.location}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <FiCalendar className="flex-shrink-0 h-5 w-5 text-primary" />
-                      <div>
-                        <h3 className="text-responsive-sm font-medium">Experience</h3>
-                        <p className="text-responsive-xs text-muted-foreground">{quickFacts.experience}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <FiBookOpen className="flex-shrink-0 h-5 w-5 text-primary" />
-                      <div>
-                        <h3 className="text-responsive-sm font-medium">Education</h3>
-                        <p className="text-responsive-xs text-muted-foreground">{quickFacts.education}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <FiHeart className="flex-shrink-0 h-5 w-5 text-primary" />
-                      <div>
-                        <h3 className="text-responsive-sm font-medium">Interests</h3>
-                        <p className="text-responsive-xs text-muted-foreground">{quickFacts.interests}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <FiMessageSquare className="flex-shrink-0 h-5 w-5 text-primary" />
-                      <div>
-                        <h3 className="text-responsive-sm font-medium">Languages</h3>
-                        <p className="text-responsive-xs text-muted-foreground">{quickFacts.languages}</p>
-                      </div>
-                    </div>
-                  </div>
-                </ContentCard>
-              </BackgroundPattern>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </BackgroundPattern>
+      </section>
+
+      {/* About Sections */}
+      {sortedAboutSections.length > 0 && (
+        <section className="section">
+          <div className="container px-4 md:px-6">
+            <div className="max-w-5xl mx-auto space-y-8">
+              {sortedAboutSections.map((section: AboutSection, index: number) => (
+                <div key={section.id} className="card p-8 md:p-12">
+                  <h2 className="text-2xl font-bold mb-6 pb-4 border-b border-border">{section.title}</h2>
+                  <div className="prose dark:prose-invert max-w-none">
+                    <div dangerouslySetInnerHTML={{ __html: section.content }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* My Approach Section */}
+      {sortedApproachItems.length > 0 && (
+        <section className="section bg-muted/30">
+          <div className="container px-4 md:px-6">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="section-title">My Approach</h2>
+                <p className="section-subtitle">The principles that guide my work</p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2">
+                {sortedApproachItems.map((item: ApproachItem) => (
+                  <div key={item.id} className="card p-6">
+                    <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                    <p className="text-muted-foreground">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Quick Facts */}
+      <section className="section">
+        <div className="container px-4 md:px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="section-title">Quick Facts</h2>
+              <p className="section-subtitle">A snapshot of who I am</p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="card flex items-start gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <FiMapPin className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">Location</h3>
+                  <p className="text-foreground mt-1">{quickFacts.location}</p>
+                </div>
+              </div>
+              <div className="card flex items-start gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <FiCalendar className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">Experience</h3>
+                  <p className="text-foreground mt-1">{quickFacts.experience}</p>
+                </div>
+              </div>
+              <div className="card flex items-start gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <FiBookOpen className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">Education</h3>
+                  <p className="text-foreground mt-1">{quickFacts.education}</p>
+                </div>
+              </div>
+              <div className="card flex items-start gap-4">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <FiHeart className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">Interests</h3>
+                  <p className="text-foreground mt-1">{quickFacts.interests}</p>
+                </div>
+              </div>
+              <div className="card flex items-start gap-4 md:col-span-2 lg:col-span-1">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <FiMessageSquare className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-sm text-muted-foreground uppercase tracking-wider">Languages</h3>
+                  <p className="text-foreground mt-1">{quickFacts.languages}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section bg-gradient-to-br from-primary/5 via-background to-purple-500/5">
+        <div className="container px-4 md:px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Interested in working together?</h2>
+            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Let&apos;s discuss how I can help bring your ideas to life.
+            </p>
+            <Link href="/contact" className="btn-primary">
+              Get in Touch
+              <FiArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
-} 
+}
